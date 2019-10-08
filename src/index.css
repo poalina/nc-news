@@ -10,9 +10,9 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  color: black;
 }
 
 body {
-  /* background-image: url("img_tree.gif"), url("paper.gif"); */
-  background-color: royalblue;
+  background-image: url("https://images.pexels.com/photos/1029409/pexels-photo-1029409.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
 }
