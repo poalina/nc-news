@@ -19,6 +19,7 @@ class App extends Component {
         <Router>
           <Homepage path="/" />
           <ArticlesList path="/articles" />
+          <ArticlesList path="/topics/:topic" />
           <SingleArticle path="/articles/:article_id" />
           <TopicsList path="/topics" />
         </Router>
