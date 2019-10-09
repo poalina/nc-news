@@ -6,9 +6,8 @@ export default class ArticlesList extends Component {
   state = { articles: [], isLoading: true };
 
   componentDidMount() {
-    // this props.topic
-    // console.log(this.props, "props===");
     const { topic, username } = this.props;
+    // this props.topic
     api.getAllArticles(topic, username).then(({ data }) => {
       const { articles } = data;
       this.setState({ articles });
