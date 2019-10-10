@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
+import TogglerShowHide from "./TogglerShowHide";
 
 export default class SingleArticle extends Component {
   state = { article: {}, comments: [] };
@@ -28,15 +29,17 @@ export default class SingleArticle extends Component {
         </p>
 
         <h2>Comments:</h2>
-        <>
-          {comments.map(comment => {
-            return (
-              <p key={comment.comment_id}>
-                <i>{comment.author}</i>: "{comment.body}"
-              </p>
-            );
-          })}
-        </>
+        <TogglerShowHide>
+          <>
+            {comments.map(comment => {
+              return (
+                <p key={comment.comment_id}>
+                  <i>{comment.author}</i>: "{comment.body}"
+                </p>
+              );
+            })}
+          </>
+        </TogglerShowHide>
       </div>
     );
   }

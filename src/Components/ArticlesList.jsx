@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
-import { Link } from "@reach/router";
+
 import ArticleCard from "./ArticleCard";
 
 export default class ArticlesList extends Component {
@@ -21,22 +21,9 @@ export default class ArticlesList extends Component {
       <div>
         <ul className="list">
           {articles.map(article => {
-            return (
-              <li key={article.article_id}>
-                <b>
-                  <Link to={`/articles/${article.article_id}`}>
-                    {" "}
-                    {article.title}
-                  </Link>
-                </b>
-                <br /> <i>{article.author}</i>
-                <br />
-                <br />
-              </li>
-            );
+            return <ArticleCard article={article} key={article.article_id} />;
           })}
         </ul>
-        <ArticleCard />
       </div>
     );
   }
