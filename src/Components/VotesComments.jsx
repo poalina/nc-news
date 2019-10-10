@@ -13,7 +13,6 @@ export default class VotesComments extends Component {
   };
 
   render() {
-    console.log(this.props, "props form votes");
     const { votes, comment_id } = this.props;
     return (
       <div>

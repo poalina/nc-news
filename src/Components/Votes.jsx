@@ -18,11 +18,11 @@ export default class Votes extends Component {
     return (
       <>
         <p>Votes: {votes + this.state.voteCount}</p>{" "}
-        <button name="voteUp" onClick={() => this.updateVotes(1)}>
+        <button name="voteUp" onClick={() => this.updateArticlesVotes(1)}>
           {" "}
           Vote up
         </button>
-        <button name="voteDown" onClick={() => this.updateVotes(-1)}>
+        <button name="voteDown" onClick={() => this.updateArticlesVotes(-1)}>
           {" "}
           Vote down{" "}
         </button>
