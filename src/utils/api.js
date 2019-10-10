@@ -32,3 +32,9 @@ export const patchArticleVote = async (article_id, num) => {
     inc_votes: num
   });
 };
+
+export const patchCommentVote = async (comment_id, num) => {
+  return await axios.patch(`${baseURL}/comments/${comment_id}`, {
+    inc_votes: num
+  });
+};

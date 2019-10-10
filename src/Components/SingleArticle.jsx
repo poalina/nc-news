@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../utils/api";
 import TogglerShowHide from "./TogglerShowHide";
 import Votes from "./Votes";
+import VotesComments from "./VotesComments";
 
 export default class SingleArticle extends Component {
   state = { article: {}, comments: [], isLoading: true };
@@ -20,7 +21,6 @@ export default class SingleArticle extends Component {
   render() {
     const { article } = this.state;
     const { comments } = this.state;
-    console.log(article.votes, "votes");
     if (this.state.isLoading) return <p>Loading...</p>;
     return (
       <div>
@@ -40,16 +40,17 @@ export default class SingleArticle extends Component {
           <>
             {comments.map(comment => {
               return (
-                <>
-                  <p key={comment.comment_id}>
+                <div key={comment.comment_id}>
+                  <p>
                     <i> {comment.author}:</i> "{comment.body}" <br />
                     Created at: <i>{comment.created_at}</i>
                   </p>
-                  <p> Votes: {comment.votes} </p>
-                  <button> Vote up</button>
-                  <button> Vote down</button>
-                  <hr />
-                </>
+
+                  <VotesComments
+                    votes={comment.votes}
+                    comment_id={comment.comment_id}
+                  />
+                </div>
               );
             })}
           </>
