@@ -26,3 +26,9 @@ export const getCommentsByArticleId = async article_id => {
   );
   return data;
 };
+
+export const patchArticleVote = async (article_id, num) => {
+  return await axios.patch(`${baseURL}/articles/${article_id}`, {
+    inc_votes: num
+  });
+};
