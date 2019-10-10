@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import { Link } from "@reach/router";
+import ArticleCard from "./ArticleCard";
 
 export default class ArticlesList extends Component {
   state = { articles: [], isLoading: true };
 
   componentDidMount() {
-    const { topic, username } = this.props;
-    // this props.topic
-    api.getAllArticles(topic, username).then(({ data }) => {
+    const { topic, username, votes } = this.props;
+    api.getAllArticles(topic, username, votes).then(({ data }) => {
       const { articles } = data;
-      this.setState({ articles });
+      this.setState({ articles, isLoading: false });
     });
   }
 
   render() {
     const { articles } = this.state;
-    // if (isLoading) return <p>Loading.......</p>;
+    if (this.state.isLoading) return <p>Loading...</p>;
     return (
       <div>
         <ul className="list">
@@ -36,6 +36,7 @@ export default class ArticlesList extends Component {
             );
           })}
         </ul>
+        <ArticleCard />
       </div>
     );
   }

@@ -9,8 +9,6 @@ export default class SingleArticle extends Component {
 
     const comments = api.getCommentsByArticleId(article_id);
     const article = api.getArticleById(article_id);
-    console.log(article);
-    console.log(comments);
 
     Promise.all([comments, article]).then(([{ comments }, { article }]) => {
       this.setState({ article, comments });
@@ -18,21 +16,27 @@ export default class SingleArticle extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { article } = this.state;
     const { comments } = this.state;
     return (
       <div>
         <h2>{article.title}</h2>
         <p>{article.body}</p>
-        <p>{article.author}</p>
+        <p>
+          Author: <i>{article.author}</i>, created at:{" "}
+          <i>{article.created_at}</i>
+        </p>
 
         <h2>Comments:</h2>
-        <ul>
+        <>
           {comments.map(comment => {
-            return <li key={comment.comment_id}>{comment.body}</li>;
+            return (
+              <p key={comment.comment_id}>
+                <i>{comment.author}</i>: "{comment.body}"
+              </p>
+            );
           })}
-        </ul>
+        </>
       </div>
     );
   }

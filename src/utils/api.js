@@ -1,9 +1,9 @@
 import axios from "axios";
 const baseURL = "https://nc-new-app.herokuapp.com/api";
 
-export const getAllArticles = async (topic, username) => {
+export const getAllArticles = async (topic, username, votes) => {
   return await axios.get(`${baseURL}/articles`, {
-    params: { topic, author: username }
+    params: { topic, author: username, votes }
   });
 };
 
