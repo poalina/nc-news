@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import * as api from "../utils/api";
 import TogglerShowHide from "./TogglerShowHide";
 import Votes from "./Votes";
-import VotesComments from "./VotesComments";
 
 export default class SingleArticle extends Component {
   state = { article: {}, comments: [], isLoading: true };
@@ -31,7 +30,11 @@ export default class SingleArticle extends Component {
           <i>{article.created_at}</i>
         </p>
         {article && (
-          <Votes votes={article.votes} article_id={article.article_id} />
+          <Votes
+            votes={article.votes}
+            id={article.article_id}
+            type="articles"
+          />
         )}
 
         <p>Comments: {article.comment_count}</p>
@@ -46,9 +49,10 @@ export default class SingleArticle extends Component {
                     Created at: <i>{comment.created_at}</i>
                   </p>
 
-                  <VotesComments
+                  <Votes
                     votes={comment.votes}
-                    comment_id={comment.comment_id}
+                    id={comment.comment_id}
+                    type="comments"
                   />
                 </div>
               );

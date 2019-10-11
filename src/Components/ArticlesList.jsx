@@ -5,23 +5,32 @@ import ArticleCard from "./ArticleCard";
 import Sort from "./Sort";
 
 export default class ArticlesList extends Component {
-  state = { articles: [], isLoading: true };
+  state = { articles: [], isLoading: true, sort_by: "created_at" };
 
   componentDidMount() {
-    const { topic, username, votes, sort_by } = this.props;
-    api.getAllArticles(topic, username, votes, sort_by).then(({ data }) => {
+    const { topic, username } = this.props;
+    api.getAllArticles(topic, username).then(({ data }) => {
       const { articles } = data;
-      console.log(votes, "votes z artcilesList 13");
+
       this.setState({ articles, isLoading: false });
     });
   }
+
+  fetchArticles = sort_by => {
+    const { topic, username } = this.props;
+    api.getAllArticles(topic, username, sort_by).then(({ data }) => {
+      const { articles } = data;
+      console.log(articles, "articles");
+      this.setState({ articles });
+    });
+  };
 
   render() {
     const { articles } = this.state;
     if (this.state.isLoading) return <p>Loading...</p>;
     return (
       <div>
-        <Sort articles={articles} />
+        <Sort articles={articles} fetchArticles={this.fetchArticles} />
 
         <ul className="list">
           {articles.map(article => {

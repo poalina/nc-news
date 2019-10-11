@@ -6,23 +6,25 @@ export default class Votes extends Component {
     voteCount: 0
   };
 
-  updateArticlesVotes = num => {
-    const { votes, article_id } = this.props;
+  updateVotes = num => {
+    const { votes, id, type } = this.props;
+
     this.setState({ voteCount: this.state.voteCount + num });
-    api.patchArticleVote(article_id, num);
+
+    api.patchVote(id, num, type);
   };
 
   render() {
-    const { votes, article_id } = this.props;
+    const { votes, id } = this.props;
 
     return (
       <>
         <p>Votes: {votes + this.state.voteCount}</p>{" "}
-        <button name="voteUp" onClick={() => this.updateArticlesVotes(1)}>
+        <button name="voteUp" onClick={() => this.updateVotes(1)}>
           {" "}
           Vote up
         </button>
-        <button name="voteDown" onClick={() => this.updateArticlesVotes(-1)}>
+        <button name="voteDown" onClick={() => this.updateVotes(-1)}>
           {" "}
           Vote down{" "}
         </button>
