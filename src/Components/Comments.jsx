@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../utils/api";
 import TogglerShowHide from "./TogglerShowHide";
 import Votes from "./Votes";
+import Post from "./Post";
 
 export default class Comments extends Component {
   state = { comments: [], isLoading: true };
@@ -16,6 +17,7 @@ export default class Comments extends Component {
 
   render() {
     const { comments } = this.state;
+    const { article_id } = this.props;
     return (
       <div>
         <TogglerShowHide>
@@ -33,6 +35,7 @@ export default class Comments extends Component {
                     id={comment.comment_id}
                     type="comments"
                   />
+                  <Post article_id={article_id} />
                 </div>
               );
             })}

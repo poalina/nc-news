@@ -20,7 +20,6 @@ export default class ArticlesList extends Component {
     const { topic, username } = this.props;
     api.getAllArticles(topic, username, sort_by).then(({ data }) => {
       const { articles } = data;
-      console.log(articles, "articles");
       this.setState({ articles });
     });
   };
