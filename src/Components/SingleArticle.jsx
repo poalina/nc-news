@@ -1,25 +1,23 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
-import TogglerShowHide from "./TogglerShowHide";
+
 import Votes from "./Votes";
+import Comments from "./Comments";
 
 export default class SingleArticle extends Component {
-  state = { article: {}, comments: [], isLoading: true };
+  state = { article: {}, isLoading: true };
 
   componentDidMount() {
     const { article_id } = this.props;
 
-    const comments = api.getCommentsByArticleId(article_id);
-    const article = api.getArticleById(article_id);
-
-    Promise.all([comments, article]).then(([{ comments }, { article }]) => {
-      this.setState({ article, comments, isLoading: false });
+    api.getArticleById(article_id).then(data => {
+      const { article } = data;
+      this.setState({ article, isLoading: false });
     });
   }
 
   render() {
     const { article } = this.state;
-    const { comments } = this.state;
     if (this.state.isLoading) return <p>Loading...</p>;
     return (
       <div>
@@ -38,27 +36,7 @@ export default class SingleArticle extends Component {
         )}
 
         <p>Comments: {article.comment_count}</p>
-
-        <TogglerShowHide>
-          <>
-            {comments.map(comment => {
-              return (
-                <div key={comment.comment_id}>
-                  <p>
-                    <i> {comment.author}:</i> "{comment.body}" <br />
-                    Created at: <i>{comment.created_at}</i>
-                  </p>
-
-                  <Votes
-                    votes={comment.votes}
-                    id={comment.comment_id}
-                    type="comments"
-                  />
-                </div>
-              );
-            })}
-          </>
-        </TogglerShowHide>
+        <Comments article_id={article.article_id} />
       </div>
     );
   }

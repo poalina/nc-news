@@ -7,7 +7,7 @@ export default class Votes extends Component {
   };
 
   updateVotes = num => {
-    const { votes, id, type } = this.props;
+    const { id, type } = this.props;
 
     this.setState({ voteCount: this.state.voteCount + num });
 
@@ -15,7 +15,7 @@ export default class Votes extends Component {
   };
 
   render() {
-    const { votes, id } = this.props;
+    const { votes } = this.props;
 
     return (
       <>
