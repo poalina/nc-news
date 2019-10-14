@@ -9,23 +9,27 @@ export default class Post extends Component {
   };
   submitHandler = event => {
     event.preventDefault();
-    const { article_id } = this.props;
-    api.postCommentByArticleId(article_id, this.state).then({});
+    const { article_id, addComment } = this.props;
+    // console.log(this.state);
+
+    api.postCommentByArticleId(article_id, this.state).then(comment => {
+      // console.log(data.comment);
+      addComment(comment);
+      this.setState({ body: "" });
+    });
   };
 
   render() {
     const { body } = this.state;
     return (
       <div>
-        {" "}
         <form onSubmit={this.submitHandler}>
-          {" "}
           <input
             type="text"
             placeholder="write here..."
-            value={body}
+            value={this.state.body}
             onChange={this.changeHandler}
-          ></input>{" "}
+          ></input>
           <button type="submit"> Add comment </button>
         </form>
       </div>

@@ -32,11 +32,19 @@ export const getCommentsByArticleId = async article_id => {
   return data;
 };
 export const postCommentByArticleId = async (article_id, body) => {
-  return await axios.post(`${baseURL}/articles/${article_id}/comments`, body);
+  return await axios
+    .post(`${baseURL}/articles/${article_id}/comments`, body)
+    .then(({ data }) => {
+      return data.comment;
+    });
 };
 
 export const patchVote = async (id, num, type) => {
   return await axios.patch(`${baseURL}/${type}/${id}`, {
     inc_votes: num
   });
+};
+
+export const deleteCommentById = async comment_id => {
+  return await axios.delete(`${baseURL}/comments/${comment_id}`);
 };
