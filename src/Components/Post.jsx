@@ -10,10 +10,8 @@ export default class Post extends Component {
   submitHandler = event => {
     event.preventDefault();
     const { article_id, addComment } = this.props;
-    // console.log(this.state);
 
     api.postCommentByArticleId(article_id, this.state).then(comment => {
-      // console.log(data.comment);
       addComment(comment);
       this.setState({ body: "" });
     });
@@ -27,7 +25,7 @@ export default class Post extends Component {
           <input
             type="text"
             placeholder="write here..."
-            value={this.state.body}
+            value={body}
             onChange={this.changeHandler}
           ></input>
           <button type="submit"> Add comment </button>
